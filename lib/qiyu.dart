@@ -88,4 +88,8 @@ class QiYu {
   static Future<bool> cleanCache() async {
     return await _channel.invokeMethod('cleanCache', {});
   }
+
+  static Future<String> getVersion() async {
+    return await _channel.invokeMethod('getPlatformVersion', {});
+  }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_qy_plugin/flutter_qiyu.dart';
+import 'package:qiyu/qiyu.dart';
 
 // import 'flutter_qiyu.dart';
 
@@ -67,6 +68,13 @@ class _MyAppState extends State<MyApp> {
                     'showCloseSessionEntry': true
                   });
                   QiYu.openServiceWindow(serviceWindowParams);
+                },
+              ),
+              TextButton(
+                child: Text('版本'),
+                onPressed: () {
+                  QiYu.getVersion()
+                      .then((value) => {print("version = " + value)});
                 },
               )
             ],

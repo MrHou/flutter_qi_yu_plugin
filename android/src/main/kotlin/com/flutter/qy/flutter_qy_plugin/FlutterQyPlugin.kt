@@ -18,7 +18,7 @@ class FlutterQyPlugin: FlutterPlugin, MethodCallHandler {
   private lateinit var channel : MethodChannel
 
   override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
-    channel = MethodChannel(flutterPluginBinding.binaryMessenger, "flutter_qy_plugin")
+    channel = MethodChannel(flutterPluginBinding.binaryMessenger, "flutter_qiyu")
     channel.setMethodCallHandler(this)
   }
 
