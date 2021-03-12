@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'flutter_qiyu.dart';
+import 'package:flutter_qy_plugin/flutter_qiyu.dart';
+
+// import 'flutter_qiyu.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
