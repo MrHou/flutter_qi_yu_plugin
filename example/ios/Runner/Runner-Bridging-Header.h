@@ -1,2 +1,2 @@
 #import "GeneratedPluginRegistrant.h"
-#import "FlutterQiyuPlugin.h"
+#import "FlutterQyPlugin.h"
