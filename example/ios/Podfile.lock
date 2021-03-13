@@ -27,7 +27,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
-  flutter_qy_plugin: e9bcbc5a928f722529d7cbc9c5fab7831bc8a8ae
+  flutter_qy_plugin: 5c374b87ce1d19cae6d1b53d2756a99af809be89
   qiyu: 0252b163564e1331846c7827ccf504f9647bba6a
   QIYU_iOS_SDK: 26ffda3ad7f797391cfe9836e4d935430e68a804
 
