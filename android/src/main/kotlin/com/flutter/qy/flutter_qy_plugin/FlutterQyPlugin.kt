@@ -1,5 +1,6 @@
 package com.flutter.qy.flutter_qy_plugin
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -9,8 +10,11 @@ import com.qiyukf.nimlib.sdk.RequestCallback
 import com.qiyukf.nimlib.sdk.StatusBarNotificationConfig
 import com.qiyukf.unicorn.api.*
 import com.qiyukf.unicorn.api.lifecycle.SessionLifeCycleOptions
+import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.FlutterPlugin.FlutterPluginBinding
+import io.flutter.embedding.engine.plugins.activity.ActivityAware
+import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
 import io.flutter.plugin.common.BinaryMessenger
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
@@ -20,13 +24,16 @@ import io.flutter.plugin.common.PluginRegistry.Registrar
 import java.util.*
 
 /** FlutterQyPlugin */
-class FlutterQyPlugin : FlutterPlugin, MethodCallHandler {
+class FlutterQyPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
     private val CHANNEL_NAME: String? = "flutter_qiyu"
+    private lateinit var activity: Activity
 
     companion object {
-        fun initSDK(context: Context, appKey: String?) {
+        fun initSDK(context: Context, appKey: String?, activity: Any) {
             val ysfOptions = YSFOptions()
-            ysfOptions.statusBarNotificationConfig = StatusBarNotificationConfig()
+            val statusBarNotificationConfig = StatusBarNotificationConfig()
+            statusBarNotificationConfig.notificationEntrance = activity as Class<out Activity>?
+            ysfOptions.statusBarNotificationConfig = statusBarNotificationConfig
             ysfOptions.onBotEventListener = object : OnBotEventListener() {
                 override fun onUrlClick(context: Context, url: String): Boolean {
                     val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
@@ -101,7 +108,8 @@ class FlutterQyPlugin : FlutterPlugin, MethodCallHandler {
     private fun registerApp(appKey: String?, appName: String?) {
         if (ysfOptions == null) {
             ysfOptions = YSFOptions()
-            ysfOptions!!.statusBarNotificationConfig = StatusBarNotificationConfig()
+            val statusBarNotificationConfig = StatusBarNotificationConfig()
+            ysfOptions!!.statusBarNotificationConfig = statusBarNotificationConfig
             ysfOptions!!.onBotEventListener = object : OnBotEventListener() {
                 override fun onUrlClick(context: Context, url: String): Boolean {
                     val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
@@ -130,7 +138,9 @@ class FlutterQyPlugin : FlutterPlugin, MethodCallHandler {
             val commodityInfoUrl = commodityInfoMap["commodityInfoUrl"] as String?
             val note = commodityInfoMap["note"] as String?
             var show = false
+            var alwaysSend = true
             if (commodityInfoMap.containsKey("show")) show = commodityInfoMap["show"] as Boolean
+            if (commodityInfoMap.containsKey("alwaysSend")) alwaysSend = commodityInfoMap["alwaysSend"] as Boolean
             var sendByUser = false
             if (commodityInfoMap.containsKey("sendByUser")) sendByUser = commodityInfoMap["sendByUser"] as Boolean
             productDetail = ProductDetail.Builder()
@@ -140,6 +150,7 @@ class FlutterQyPlugin : FlutterPlugin, MethodCallHandler {
                     .setUrl(commodityInfoUrl)
                     .setNote(note)
                     .setShow(if (show) 1 else 0)
+                    .setAlwaysSend(alwaysSend)
                     .setSendByUser(sendByUser)
                     .build()
         }
@@ -279,5 +290,18 @@ class FlutterQyPlugin : FlutterPlugin, MethodCallHandler {
     private fun teardownChannel() {
         channel!!.setMethodCallHandler(null)
         channel = null
+    }
+
+    override fun onDetachedFromActivity() {
+    }
+
+    override fun onReattachedToActivityForConfigChanges(binding: ActivityPluginBinding) {
+    }
+
+    override fun onAttachedToActivity(binding: ActivityPluginBinding) {
+        activity = binding.activity
+    }
+
+    override fun onDetachedFromActivityForConfigChanges() {
     }
 }

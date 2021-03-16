@@ -6,7 +6,8 @@ import io.flutter.app.FlutterApplication
 class MainApplication : FlutterApplication() {
     override fun onCreate() {
         super.onCreate()
-        FlutterQyPlugin.initSDK(this,"063da122b2c0a592a70556647540efd5")
+        val activity = MainActivity::class.java
+        FlutterQyPlugin.initSDK(this,"063da122b2c0a592a70556647540efd5",activity)
 
     }
 
