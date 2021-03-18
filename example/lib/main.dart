@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_qy_plugin/flutter_qiyu.dart';
-import 'package:qiyu/qiyu.dart';
 
 // import 'flutter_qiyu.dart';
 
@@ -9,7 +8,7 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
   QiYu.registerApp(
-    appKey: '063da122b2c0a592a70556647540efd5',
+    appKey: '595445914922b38dd5c313ab2011be39',
     appName: '波尔世界',
   );
 
@@ -91,6 +90,7 @@ class _MyAppState extends State<MyApp> {
         'commodityInfoUrl': 'http://www.qiyukf.com',
         'note': '￥1000',
         'show': true,
+        'sendByUser': true,
         'alwaysSend': true
       },
       'sessionTitle': '网易七鱼123',

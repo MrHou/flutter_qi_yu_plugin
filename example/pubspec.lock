@@ -68,7 +68,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "0.9.3"
+    version: "0.9.4"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -95,13 +95,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.8.0"
-  qiyu:
-    dependency: "direct main"
-    description:
-      name: qiyu
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "1.0.1"
   sky_engine:
     dependency: transitive
     description: flutter

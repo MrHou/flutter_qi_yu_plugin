@@ -16,11 +16,9 @@ dependencies:
   flutter_qy_plugin:
     path: ../
 
-  
-  
-  cupertino_icons: ^1.0.2
-  qiyu: ^1.0.1
 
+
+  cupertino_icons: ^1.0.2
 
 dev_dependencies:
   flutter_test:
